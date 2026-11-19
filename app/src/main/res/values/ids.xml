@@ -1,0 +1,36 @@
+<resources>
+    <item name="server" type="id" />
+    <item name="username" type="id" />
+    <item name="password" type="id" />
+    <item name="sign_in" type="id" />
+    <item name="library_list" type="id" />
+    <item name="player_toggle" type="id" />
+    <item name="player_next" type="id" />
+    <item name="player_previous" type="id" />
+    <item name="search_input" type="id" />
+    <item name="lyrics_translation" type="id" />
+    <item name="lyrics_follow" type="id" />
+    <item name="lyrics_list" type="id" />
+    <item name="lyrics_status" type="id" />
+    <item name="lyrics_more" type="id" />
+    <item name="queue_open" type="id" />
+    <item name="queue_panel" type="id" />
+    <item name="queue_list" type="id" />
+    <item name="player_expand" type="id" />
+    <item name="player_mode" type="id" />
+    <item name="player_effects" type="id" />
+    <item name="player_quality" type="id" />
+    <item name="player_bitrate" type="id" />
+    <item name="settings_quality" type="id" />
+    <item name="settings_effects" type="id" />
+    <item name="effects_status" type="id" />
+    <item name="library_tabs" type="id" />
+    <item name="theme_toggle" type="id" />
+    <item name="theme_color" type="id" />
+    <item name="theme_color_picker" type="id" />
+    <item name="cover_colors" type="id" />
+    <item name="home_shortcuts" type="id" />
+    <item name="ui_motion" type="id" />
+    <item name="library_cache" type="id" />
+    <item name="library_cache_status" type="id" />
+</resources>

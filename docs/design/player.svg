@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">NoMusic 全屏播放页设计示意</title>
+  <desc id="desc">温暖深色背景，左侧示例封面与歌曲信息，右侧四组双语歌词。翻译图标在歌词栏右上角，底部持续显示进度和播放控制。此图为静态方案，不是应用截图。</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="0.65">
+      <stop stop-color="#433321"/><stop offset="0.48" stop-color="#292117"/><stop offset="1" stop-color="#151412"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.25" cy="0.56" r="0.65">
+      <stop stop-color="#8F6339" stop-opacity="0.22"/><stop offset="1" stop-color="#151412" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="readingShade" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#11110F" stop-opacity="0"/><stop offset="0.45" stop-color="#11110F" stop-opacity="0.05"/><stop offset="1" stop-color="#11110F" stop-opacity="0.24"/>
+    </linearGradient>
+    <linearGradient id="art" x1="0" y1="0" x2="0.2" y2="1">
+      <stop stop-color="#AA8257"/><stop offset="0.55" stop-color="#665546"/><stop offset="1" stop-color="#283238"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#BC9B6A"/><stop offset="1" stop-color="#413D38"/></linearGradient>
+    <clipPath id="coverClip"><rect x="112" y="104" width="352" height="352" rx="16"/></clipPath>
+    <clipPath id="lyricsClip"><rect x="552" y="160" width="672" height="408"/></clipPath>
+    <symbol id="down" viewBox="0 0 24 24"><path d="m5 9 7 7 7-7"/></symbol>
+    <symbol id="more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 8v5l3 2M9 2h6M12 2v3"/></symbol>
+    <symbol id="translate" viewBox="0 0 24 24"><path d="M2 5h12M8 2v3M4 5c1 6 4 8 9 10M12 5c-1 6-4 9-9 11M14 21l4-11 4 11M16 17h4"/></symbol>
+    <symbol id="heart" viewBox="0 0 24 24"><path d="M12 20 4 12C-2 6 6 0 12 6c6-6 14 0 8 6Z"/></symbol>
+    <symbol id="shuffle" viewBox="0 0 24 24"><path d="M3 6h3c5 0 7 12 12 12h3M18 15l3 3-3 3M3 18h3c2 0 4-3 6-6s4-6 6-6h3M18 3l3 3-3 3"/></symbol>
+    <symbol id="previous" viewBox="0 0 24 24"><path d="M5 5v14M19 5 8 12l11 7Z" fill="currentColor" stroke-linejoin="round"/></symbol>
+    <symbol id="next" viewBox="0 0 24 24"><path d="M19 5v14M5 5l11 7-11 7Z" fill="currentColor" stroke-linejoin="round"/></symbol>
+    <symbol id="download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="queue" viewBox="0 0 24 24"><path d="M8 5h13M8 11h13M8 17h9M3 5h.1M3 11h.1M3 17h.1"/></symbol>
+  </defs>
+  <style>
+    text{font-family:'Noto Sans SC','Microsoft YaHei',sans-serif;fill:#F4F0E8}
+    .secondary{fill:#C2B8AA}.lyric-secondary{fill:#C2B6A6}.accent{fill:#D9B982}
+    .current-original{fill:#FFF8EC}.current-translation{fill:#E3D6C3}
+    .icon{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;color:#F4F0E8}
+  </style>
+  <rect width="1280" height="720" fill="url(#background)"/>
+  <rect width="1280" height="720" fill="url(#glow)"/>
+  <rect width="1280" height="720" fill="url(#readingShade)"/>
+
+  <use xlink:href="#down" x="40" y="32" width="24" height="24" class="icon"/>
+  <text x="104" y="51" font-size="20" class="secondary">来自 · 全部歌曲</text>
+  <use xlink:href="#timer" x="1072" y="32" width="24" height="24" class="icon" style="color:#D9B982"/>
+  <text x="1124" y="51" font-size="18" class="accent">30:00</text>
+  <use xlink:href="#more" x="1216" y="32" width="24" height="24" class="icon"/>
+
+  <g clip-path="url(#coverClip)">
+    <rect x="112" y="104" width="352" height="352" fill="url(#art)"/>
+    <circle cx="382" cy="178" r="35" fill="#E8D5AF" opacity="0.8"/>
+    <path d="M112 312 174 242 219 280 275 222 330 289 376 258 464 317V456H112Z" fill="#3E4442"/>
+    <path d="M112 358 181 293 235 343 307 286 379 329 423 298 464 348V456H112Z" fill="#29383A"/>
+    <path d="M112 408 193 363 257 393 333 346 397 384 464 357V456H112Z" fill="#1B2A2F"/>
+    <path d="M296 312c-47 34-28 47-1 65 31 19 12 49-11 79h108c13-36 4-59-36-79-35-18-52-31-60-65Z" fill="url(#road)"/>
+    <path d="M296 318c-18 25-8 39 30 60 38 21 26 43 13 78" fill="none" stroke="#E8CF9D" stroke-width="3" stroke-dasharray="10 13" opacity="0.65"/>
+    <text x="140" y="151" font-size="12" letter-spacing="3" fill="#F4E7CE">NOMUSIC COLLECTION</text>
+    <text x="140" y="207" font-size="34" font-weight="700" fill="#F7E8CA">ON THE</text>
+    <text x="140" y="248" font-size="34" font-weight="700" fill="#F7E8CA">WAY HOME</text>
+    <text x="140" y="430" font-size="14" fill="#E2D1B0" letter-spacing="2">夜行集 · 示例封面</text>
+  </g>
+  <rect x="112.5" y="104.5" width="351" height="351" rx="16" fill="none" stroke="#F4F0E8" stroke-opacity="0.12"/>
+  <text x="288" y="496" font-size="28" font-weight="700" text-anchor="middle">回家路上</text>
+  <text x="184" y="547" font-size="18" text-anchor="middle" class="secondary">NoMusic 示例 ›</text>
+  <text x="392" y="547" font-size="18" text-anchor="middle" class="secondary">夜行集 ›</text>
+
+  <text x="552" y="123" font-size="20" class="secondary">歌词</text>
+  <rect x="1104" y="88" width="56" height="56" rx="12" fill="#3C3225"/>
+  <use xlink:href="#translate" x="1120" y="104" width="24" height="24" class="icon" style="color:#D9B982"/>
+  <circle cx="1149" cy="99" r="6" fill="#D9B982"/>
+  <path d="m1146 99 2 2 4-4" fill="none" stroke="#241B10" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <use xlink:href="#more" x="1184" y="104" width="24" height="24" class="icon"/>
+  <g clip-path="url(#lyricsClip)">
+    <text x="552" y="212" font-size="30" class="lyric-secondary">Beyond the city lights</text>
+    <text x="552" y="244" font-size="20" class="lyric-secondary">越过城市的灯火</text>
+    <text x="552" y="316" font-size="30" font-weight="700" class="current-original">We follow the road back home</text>
+    <text x="552" y="348" font-size="20" class="current-translation">沿着归途一路向前</text>
+    <text x="552" y="420" font-size="30" class="lyric-secondary">Keep the quiet close to me</text>
+    <text x="552" y="452" font-size="20" class="lyric-secondary">让安静陪在身旁</text>
+    <text x="552" y="524" font-size="30" class="lyric-secondary">A little warmth will guide us</text>
+    <text x="552" y="556" font-size="20" class="lyric-secondary">一点暖意为我们引路</text>
+  </g>
+
+  <rect x="72.5" y="584.5" width="1135" height="111" rx="32" fill="#27231F" fill-opacity="0.94" stroke="#494137"/>
+  <text x="96" y="614" font-size="16" class="secondary">01:28</text>
+  <rect x="176" y="606" width="928" height="4" rx="2" fill="#51473B"/>
+  <rect x="176" y="606" width="361" height="4" rx="2" fill="#D9B982"/>
+  <circle cx="537" cy="608" r="6" fill="#F4F0E8"/>
+  <text x="1184" y="614" font-size="16" text-anchor="end" class="secondary">03:46</text>
+  <use xlink:href="#heart" x="112" y="652" width="24" height="24" class="icon"/>
+  <use xlink:href="#shuffle" x="176" y="652" width="24" height="24" class="icon"/>
+  <use xlink:href="#previous" x="544" y="652" width="24" height="24" class="icon"/>
+  <circle cx="640" cy="664" r="32" fill="#D9B982"/>
+  <path d="M631 654h6v20h-6zm12 0h6v20h-6Z" fill="#241B10"/>
+  <use xlink:href="#next" x="712" y="652" width="24" height="24" class="icon"/>
+  <use xlink:href="#download" x="1072" y="652" width="24" height="24" class="icon"/>
+  <use xlink:href="#queue" x="1144" y="652" width="24" height="24" class="icon"/>
+</svg>

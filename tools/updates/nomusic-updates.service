@@ -1,0 +1,19 @@
+[Unit]
+Description=NoMusic APK update origin
+After=network.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+WorkingDirectory=/opt/nomusic-updates
+ExecStart=/usr/bin/python3 -B /opt/nomusic-updates/server.py /opt/nomusic-updates/site --port 5202
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

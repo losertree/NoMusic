@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">NoMusic 深色曲库设计示意</title>
+  <desc id="desc">左侧六个一级入口，右侧曲库分类与歌曲列表，底部悬浮播放条。当前播放歌曲为回家路上，所有内容均为设计示例，此图不是应用截图。</desc>
+  <defs>
+    <linearGradient id="cover" x1="0" y1="0" x2="0.8" y2="1"><stop stop-color="#B38A54"/><stop offset="1" stop-color="#293D3D"/></linearGradient>
+    <linearGradient id="coverBlue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5D7780"/><stop offset="1" stop-color="#253340"/></linearGradient>
+    <linearGradient id="coverRose" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#976F65"/><stop offset="1" stop-color="#3E353D"/></linearGradient>
+    <clipPath id="listClip"><rect x="216" y="192" width="1040" height="392"/></clipPath>
+    <clipPath id="smallCoverClip"><rect width="64" height="64" rx="8"/></clipPath>
+    <symbol id="home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11h-6v-7H9v7H3Z"/></symbol>
+    <symbol id="music" viewBox="0 0 24 24"><path d="M9 17V5l12-2v12M9 8l12-2"/><ellipse cx="6" cy="18" rx="3" ry="3"/><ellipse cx="18" cy="16" rx="3" ry="3"/></symbol>
+    <symbol id="heart" viewBox="0 0 24 24"><path d="M12 20 4 12C-2 6 6 0 12 6c6-6 14 0 8 6Z"/></symbol>
+    <symbol id="queue" viewBox="0 0 24 24"><path d="M8 5h13M8 11h13M8 17h9M3 5h.1M3 11h.1M3 17h.1"/></symbol>
+    <symbol id="download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="settings" viewBox="0 0 24 24"><path d="m9 3 1-2h4l1 2 2 1 3-.1 2 3-1 3v3l1 3-2 3-3-.1-2 1-1 2h-4l-1-2-2-1-3 .1-2-3 1-3v-3L2 7l2-3 3 .1Z" transform="translate(1 1) scale(.91)"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="m15.5 15.5 5 5"/></symbol>
+    <symbol id="filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v7l-4-2v-5Z"/></symbol>
+    <symbol id="sort" viewBox="0 0 24 24"><path d="M5 3v18m-3-3 3 3 3-3M12 5h9M12 11h6M12 17h3"/></symbol>
+    <symbol id="more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="previous" viewBox="0 0 24 24"><path d="M5 5v14M19 5 8 12l11 7Z" fill="currentColor"/></symbol>
+    <symbol id="next" viewBox="0 0 24 24"><path d="M19 5v14M5 5l11 7-11 7Z" fill="currentColor"/></symbol>
+    <symbol id="expand" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></symbol>
+    <symbol id="artwork" viewBox="0 0 64 64"><g clip-path="url(#smallCoverClip)"><rect width="64" height="64" fill="url(#cover)"/><circle cx="46" cy="17" r="7" fill="#E2C598"/><path d="M0 49 15 30 28 42 40 29 64 48V64H0Z" fill="#273C3D"/><path d="m32 38-6 26h17Z" fill="#AC946A"/></g></symbol>
+  </defs>
+  <style>
+    text{font-family:'Noto Sans SC','Microsoft YaHei',sans-serif;fill:#F4F0E8}
+    .secondary{fill:#C2B8AA}.muted{fill:#A69B8C}.accent{fill:#D9B982}
+    .icon{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;color:#C2B8AA}
+  </style>
+  <rect width="1280" height="720" fill="#151412"/>
+  <rect width="192" height="720" fill="#1D1B18"/>
+  <rect x="24" y="28" width="28" height="28" rx="9" fill="#D9B982"/>
+  <path d="M34 45V34l10-1v10" fill="none" stroke="#241B10" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="31" cy="46" r="3" fill="#241B10"/><circle cx="41" cy="44" r="3" fill="#241B10"/>
+  <text x="64" y="50" font-size="22" font-weight="700">NoMusic</text>
+
+  <use xlink:href="#home" x="28" y="128" width="24" height="24" class="icon"/>
+  <text x="68" y="147" font-size="20" class="secondary">首页</text>
+  <rect x="12" y="176" width="168" height="56" rx="12" fill="#3C3225"/>
+  <rect x="12" y="192" width="3" height="24" rx="1.5" fill="#D9B982"/>
+  <use xlink:href="#music" x="28" y="192" width="24" height="24" class="icon" style="color:#D9B982"/>
+  <text x="68" y="211" font-size="20" font-weight="700" class="accent">曲库</text>
+  <use xlink:href="#heart" x="28" y="256" width="24" height="24" class="icon"/>
+  <text x="68" y="275" font-size="20" class="secondary">我喜欢</text>
+  <use xlink:href="#queue" x="28" y="320" width="24" height="24" class="icon"/>
+  <text x="68" y="339" font-size="20" class="secondary">歌单</text>
+  <use xlink:href="#download" x="28" y="384" width="24" height="24" class="icon"/>
+  <text x="68" y="403" font-size="20" class="secondary">离线</text>
+  <path d="M24 616h144" stroke="#494137"/>
+  <use xlink:href="#settings" x="28" y="648" width="24" height="24" class="icon"/>
+  <text x="68" y="667" font-size="20" class="secondary">设置</text>
+
+  <text x="216" y="64" font-size="28" font-weight="700">曲库</text>
+  <text x="292" y="63" font-size="18" class="muted">325 首</text>
+  <rect x="776" y="28" width="288" height="56" rx="12" fill="#27231F"/>
+  <use xlink:href="#search" x="792" y="44" width="24" height="24" class="icon"/>
+  <text x="832" y="63" font-size="18" class="secondary">搜索音乐</text>
+  <use xlink:href="#filter" x="1088" y="44" width="24" height="24" class="icon"/>
+  <use xlink:href="#sort" x="1152" y="44" width="24" height="24" class="icon"/>
+  <use xlink:href="#more" x="1216" y="44" width="24" height="24" class="icon"/>
+
+  <rect x="216" y="96" width="88" height="56" rx="12" fill="#3C3225"/>
+  <text x="260" y="131" font-size="20" font-weight="700" text-anchor="middle" class="accent">歌曲</text>
+  <text x="356" y="131" font-size="20" text-anchor="middle" class="secondary">专辑</text>
+  <text x="452" y="131" font-size="20" text-anchor="middle" class="secondary">歌手</text>
+  <text x="548" y="131" font-size="20" text-anchor="middle" class="secondary">曲风</text>
+  <text x="652" y="131" font-size="20" text-anchor="middle" class="secondary">文件夹</text>
+  <text x="1256" y="130" font-size="16" text-anchor="end" class="muted">全部曲风 · 最近添加</text>
+  <text x="332" y="182" font-size="16" class="muted">歌曲 / 歌手</text>
+  <text x="904" y="182" font-size="16" class="muted">专辑</text>
+  <text x="1184" y="182" font-size="16" text-anchor="end" class="muted">时长</text>
+
+  <g clip-path="url(#listClip)">
+    <text x="232" y="235" font-size="16" text-anchor="middle" class="muted">1</text>
+    <use xlink:href="#artwork" x="264" y="202" width="52" height="52"/>
+    <text x="332" y="222" font-size="22">城市的灯火</text>
+    <text x="332" y="248" font-size="18" class="secondary">NoMusic 示例</text>
+    <text x="904" y="235" font-size="18" class="secondary">夜行集</text>
+    <text x="1184" y="235" font-size="16" text-anchor="end" class="muted">04:12</text>
+    <use xlink:href="#more" x="1216" y="216" width="24" height="24" class="icon"/>
+
+    <rect x="216" y="264" width="1040" height="72" rx="12" fill="#3C3225"/>
+    <path d="M226 298v9m6-16v16m6-12v12" fill="none" stroke="#D9B982" stroke-width="3" stroke-linecap="round"/>
+    <use xlink:href="#artwork" x="264" y="274" width="52" height="52"/>
+    <text x="332" y="294" font-size="22" font-weight="700" class="accent">回家路上</text>
+    <text x="332" y="320" font-size="18" class="secondary">NoMusic 示例</text>
+    <text x="904" y="307" font-size="18" class="secondary">夜行集</text>
+    <text x="1184" y="307" font-size="16" text-anchor="end" class="secondary">03:46</text>
+    <use xlink:href="#more" x="1216" y="288" width="24" height="24" class="icon"/>
+
+    <text x="232" y="379" font-size="16" text-anchor="middle" class="muted">3</text>
+    <rect x="264" y="346" width="52" height="52" rx="8" fill="url(#coverBlue)"/>
+    <circle cx="290" cy="372" r="14" fill="none" stroke="#BAC9C9" stroke-width="1.5"/><circle cx="290" cy="372" r="3" fill="#BAC9C9"/>
+    <text x="332" y="366" font-size="22">安静同行</text>
+    <text x="332" y="392" font-size="18" class="secondary">旅途合辑</text>
+    <text x="904" y="379" font-size="18" class="secondary">慢行日记</text>
+    <text x="1184" y="379" font-size="16" text-anchor="end" class="muted">04:08</text>
+    <use xlink:href="#more" x="1216" y="360" width="24" height="24" class="icon"/>
+
+    <text x="232" y="451" font-size="16" text-anchor="middle" class="muted">4</text>
+    <rect x="264" y="418" width="52" height="52" rx="8" fill="url(#coverRose)"/>
+    <path d="m269 454 14-20 11 13 12-17 5 24" fill="none" stroke="#D7BAB0" stroke-width="2"/>
+    <text x="332" y="438" font-size="22">夜风经过</text>
+    <text x="332" y="464" font-size="18" class="secondary">示例歌手</text>
+    <text x="904" y="451" font-size="18" class="secondary">公路两端</text>
+    <text x="1184" y="451" font-size="16" text-anchor="end" class="muted">03:52</text>
+    <use xlink:href="#more" x="1216" y="432" width="24" height="24" class="icon"/>
+
+    <text x="232" y="523" font-size="16" text-anchor="middle" class="muted">5</text>
+    <rect x="264" y="490" width="52" height="52" rx="8" fill="url(#coverBlue)"/>
+    <path d="M269 525c10-18 20 13 42-9" fill="none" stroke="#BAC9C9" stroke-width="2"/>
+    <text x="332" y="510" font-size="22">下一站晴天</text>
+    <text x="332" y="536" font-size="18" class="secondary">旅途合辑</text>
+    <text x="904" y="523" font-size="18" class="secondary">慢行日记</text>
+    <text x="1184" y="523" font-size="16" text-anchor="end" class="muted">04:30</text>
+    <use xlink:href="#more" x="1216" y="504" width="24" height="24" class="icon"/>
+
+    <text x="232" y="595" font-size="16" text-anchor="middle" class="muted">6</text>
+    <use xlink:href="#artwork" x="264" y="562" width="52" height="52"/>
+    <text x="332" y="582" font-size="22">远方来信</text>
+    <text x="904" y="595" font-size="18" class="secondary">夜行集</text>
+  </g>
+
+  <rect x="216.5" y="600.5" width="1039" height="95" rx="24" fill="#27231F" stroke="#494137"/>
+  <use xlink:href="#artwork" x="232" y="616" width="64" height="64"/>
+  <text x="312" y="640" font-size="22" font-weight="700">回家路上</text>
+  <text x="312" y="668" font-size="18" class="secondary">NoMusic 示例 · 01:28 / 03:46</text>
+  <use xlink:href="#previous" x="664" y="636" width="24" height="24" class="icon" style="color:#F4F0E8"/>
+  <circle cx="752" cy="648" r="32" fill="#D9B982"/>
+  <path d="M743 638h6v20h-6zm12 0h6v20h-6Z" fill="#241B10"/>
+  <use xlink:href="#next" x="824" y="636" width="24" height="24" class="icon" style="color:#F4F0E8"/>
+  <use xlink:href="#heart" x="1064" y="636" width="24" height="24" class="icon"/>
+  <use xlink:href="#queue" x="1136" y="636" width="24" height="24" class="icon"/>
+  <use xlink:href="#expand" x="1208" y="636" width="24" height="24" class="icon"/>
+  <path d="M240 693h992" stroke="#494137" stroke-width="2" stroke-linecap="round"/>
+  <path d="M240 693h386" stroke="#D9B982" stroke-width="2" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,325 @@
+﻿INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=1
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=
+
+com.nomusic.app.AudioCachePolicyTest:
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testBulkWaitsForNetworkAndRestartsAutomaticallyWhenOnline
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=1
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testBulkWaitsForNetworkAndRestartsAutomaticallyWhenOnline
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=2
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testCompleteIndexSkipsExistingAndSurvivesRestart
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=2
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testCompleteIndexSkipsExistingAndSurvivesRestart
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=3
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testFullLibraryPausesWithoutEvictionAndResumesAfterSpaceReleased
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=3
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testFullLibraryPausesWithoutEvictionAndResumesAfterSpaceReleased
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=4
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testLastPlaybackWinsOverLookupAndDownloadOrder
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=4
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testLastPlaybackWinsOverLookupAndDownloadOrder
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=5
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testManualDownloadIsPreservedAndUpdatesIndexOnMoveAndDelete
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=5
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testManualDownloadIsPreservedAndUpdatesIndexOnMoveAndDelete
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=6
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testPauseCancelsBlockedLibraryAndPreservesCheckpoint
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=6
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testPauseCancelsBlockedLibraryAndPreservesCheckpoint
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=7
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testQueuePrefetchDefersDuringBufferingAndCancelsOldList
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=7
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testQueuePrefetchDefersDuringBufferingAndCancelsOldList
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=8
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testQueueRefreshesCacheForSelectedQuality
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=8
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testQueueRefreshesCacheForSelectedQuality
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=9
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testReadRetriesAreBoundedAndPermissionFailuresAreNotRepeated
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=9
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testReadRetriesAreBoundedAndPermissionFailuresAreNotRepeated
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=10
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testSocketTimeoutExhaustionStopsBulkWithoutBusyLoop
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=10
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testSocketTimeoutExhaustionStopsBulkWithoutBusyLoop
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=11
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testTruncationNeverMarksCachedAndRetriesCanRecover
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=11
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.AudioCachePolicyTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=11
+
+INSTRUMENTATION_STATUS: test=testTruncationNeverMarksCachedAndRetriesCanRecover
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_RESULT: stream=
+
+Test results for NoMusicTestRunner=...........
+
+Time: 122.98
+
+
+
+OK (11 tests)
+
+
+
+
+
+INSTRUMENTATION_CODE: -1

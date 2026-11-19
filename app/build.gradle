@@ -1,0 +1,57 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.nomusic.app'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'com.nomusic.player'
+        minSdk 16
+        targetSdk 28
+        versionCode providers.gradleProperty('nomusicVersionCode').map { it.toInteger() }.getOrElse(14)
+        versionName providers.gradleProperty('nomusicVersionName').getOrElse('0.6.2')
+        testInstrumentationRunner 'com.nomusic.app.NoMusicTestRunner'
+    }
+
+    flavorDimensions += 'device'
+    buildFeatures { buildConfig true }
+    productFlavors {
+        standard {
+            dimension 'device'
+        }
+        cs11 {
+            dimension 'device'
+            applicationId 'com.netease.cloudmusic'
+            versionNameSuffix '-cs11'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            // Preserve the installation identity of the APKs shipped before 0.2.
+            // The release itself is not debuggable.
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        abortOnError true
+        checkReleaseBuilds true
+        disable 'ExpiredTargetSdkVersion', 'OldTargetApi', 'ObsoleteSdkInt'
+    }
+}
+
+dependencies {
+    // Modern TLS on Android 4.x, including ARMv7 car units and x86 emulators.
+    implementation 'org.conscrypt:conscrypt-android:2.5.2'
+    androidTestCompileOnly files("${android.sdkDirectory}/platforms/${android.compileSdkVersion}/optional/android.test.base.jar",
+            "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/optional/android.test.runner.jar")
+}
