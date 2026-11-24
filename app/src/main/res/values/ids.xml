@@ -33,4 +33,11 @@
     <item name="ui_motion" type="id" />
     <item name="library_cache" type="id" />
     <item name="library_cache_status" type="id" />
+    <item name="player_karaoke" type="id" />
+    <item name="lyrics_pronunciation" type="id" />
+    <item name="lyrics_reading" type="id" />
+    <item name="lyrics_original" type="id" />
+    <item name="lyrics_translation_line" type="id" />
+    <item name="settings_widgets" type="id" />
+    <item name="settings_karaoke" type="id" />
 </resources>

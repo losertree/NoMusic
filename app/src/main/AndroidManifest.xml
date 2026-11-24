@@ -36,6 +36,18 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <receiver android:name=".MusicWidgetProvider$Tall" android:label="@string/widget_tall_name" android:exported="true">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_tall_info" />
+        </receiver>
+        <receiver android:name=".MusicWidgetProvider$Card" android:label="@string/widget_card_name" android:exported="true">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_card_info" />
+        </receiver>
+        <receiver android:name=".MusicWidgetProvider$Compact" android:label="@string/widget_compact_name" android:exported="true">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_compact_info" />
+        </receiver>
         <service android:name=".PlaybackService" android:exported="false" android:stopWithTask="false" />
         <service android:name=".CacheService" android:exported="false" />
         <service android:name=".FloatingLyricsService" android:exported="false" />

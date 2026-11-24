@@ -13,6 +13,8 @@ img/
 docs/VALIDATION.md
 docs/VALIDATION-*.md
 !docs/VALIDATION-0.6.2.md
+!docs/VALIDATION-0.7.0.md
+!docs/VALIDATION-0.7.1.md
 docs/test-results/*
 !docs/test-results/0.6.2-api16-features.txt
 !docs/test-results/0.6.2-api16-policy.txt
@@ -20,6 +22,16 @@ docs/test-results/*
 !docs/test-results/0.6.2-api19-features.txt
 !docs/test-results/0.6.2-api19-policy.txt
 !docs/test-results/0.6.2-api19-installed-release.txt
+!docs/test-results/0.7.0-api19-base.txt
+!docs/test-results/0.7.0-api19-features.txt
+!docs/test-results/0.7.0-api19-ui.txt
+!docs/test-results/0.7.0-api19-widgets-karaoke.txt
+!docs/test-results/0.7.0-api19-installed-release.txt
+!docs/test-results/0.7.1-api19-base.txt
+!docs/test-results/0.7.1-api19-ui.txt
+!docs/test-results/0.7.1-api19-widgets-karaoke.txt
+!docs/test-results/0.7.1-api19-installed-release.txt
+!docs/test-results/0.7.1-api16-karaoke.txt
 docs/screenshots/*
 !docs/screenshots/home-0.4.1-gold-android44-fixture.png
 !docs/screenshots/home-0.4.1-jade-android44-fixture.png
@@ -30,3 +42,9 @@ docs/screenshots/*
 !docs/screenshots/player-0.3-fixture.png
 !docs/screenshots/player-fontscale13-0.3-api16-fixture.png
 !docs/screenshots/queue-0.3-fixture.png
+!docs/screenshots/widget-tall-0.7-fixture.png
+!docs/screenshots/widget-card-0.7-fixture.png
+!docs/screenshots/widget-compact-0.7-fixture.png
+!docs/screenshots/widget-desktop-0.7-fixture.png
+!docs/screenshots/karaoke-japanese-0.7-fixture.png
+!docs/screenshots/karaoke-japanese-0.7.1-fixture.png

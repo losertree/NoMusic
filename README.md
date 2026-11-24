@@ -4,16 +4,18 @@
 
 ![NoMusic 首页（fixture 示例数据）](docs/screenshots/home-0.4.1-gold-android44-fixture.png)
 
+当前版本 **0.7.1** 包含三种桌面组件和 K 歌跟唱：竖版适合 CS11 约三分之一屏宽、桌面全高，另有歌词卡片和控制条；开启 K 歌后在原歌词上方显示粤拼、日语 / 韩语罗马音，保留原来的封面布局、歌词字号与滚动方式。发音在本机生成并缓存，详细入口、尺寸和兼容范围见 [组件与 K 歌说明](docs/WIDGETS-KARAOKE.md)。
+
 界面参考 [fn-music-desktop](https://github.com/guihaiwang/fn-music-desktop)，采用暖炭黑与柔金默认配色、六入口侧栏、曲库分类与专辑网格。首页四个快捷入口随可用宽度和字号自动换行。设置支持深浅外观与六种主题色；播放页默认随封面联动，歌词旁可切换译文。全屏控制条按窗口宽度排布按键，播放／暂停只显示随封面或主题变色的图标。常用触控区为 48 dp，支持标准媒体键。新版 [NoMusic 标志](docs/design/logo.svg) 用于启动图标、登录页和侧栏。
 
 ## 下载与安装
 
-当前版本 **0.6.2**，下载站：[nomusic.losertree.de](https://nomusic.losertree.de/)。
+下载 **0.7.1**：[nomusic.losertree.de](https://nomusic.losertree.de/) · [GitHub Releases](https://github.com/losertree/NoMusic/releases/tag/v0.7.1)。已有版本可在「设置 → 检查更新」升级。
 
 | 安装包 | 包名 | 用途 |
 | --- | --- | --- |
-| [NoMusic-0.6.2-cs11.apk](https://nomusic.losertree.de/downloads/NoMusic-0.6.2-cs11.apk) | com.netease.cloudmusic | 领克 CS11 常见音乐包名兼容版 |
-| [NoMusic-0.6.2-standard.apk](https://nomusic.losertree.de/downloads/NoMusic-0.6.2-standard.apk) | com.nomusic.player | 普通安卓设备 |
+| [NoMusic-0.7.1-cs11.apk](https://nomusic.losertree.de/downloads/NoMusic-0.7.1-cs11.apk) | com.netease.cloudmusic | 领克 CS11 常见音乐包名兼容版 |
+| [NoMusic-0.7.1-standard.apk](https://nomusic.losertree.de/downloads/NoMusic-0.7.1-standard.apk) | com.nomusic.player | 普通安卓设备 |
 
 release 包不可调试，签名沿用 0.1.0，可直接覆盖现有 NoMusic，保留会话、队列和数据。CS11 版与官方网易云包名相同，不能同时安装或覆盖官方签名的应用。
 
@@ -45,12 +47,14 @@ adb -s <序列号> shell am start -n com.netease.cloudmusic/com.nomusic.app.Main
 - **音质**：「设置 → 播放音质」提供原始流和 MP3 96 / 128 / 192 / 256 / 320 kbps，切换时从当前进度继续。原始格式不可用时尝试 MP3 192 kbps，离线可使用完整缓存。歌曲列表在歌手前显示 SQ、HQ、Hi-Res、DSD 等原文件标识；旧列表缓存联网后会原地补齐。播放页在歌手和专辑之间显示原文件码率，播放档位单独显示在顶部。
 - **音效**：播放页顶部滑杆图标或「设置 → 音效」打开均衡器。预设包括平直、温暖、人声和摇滚，有自定义五段及低音增强，调整即时应用，切歌保留。效果可关闭，支持情况取决于设备的音频输出。
 - **后台**：前台服务、通知操作、旧式锁屏元数据、焦点丢失 / 恢复 / 压低音量、拔耳机暂停、可选开机打开和屏幕常亮。
+- **桌面组件**：长按桌面 → 小部件 → NoMusic，选择竖版歌词 / 歌词卡片 / 控制条，支持调整尺寸；歌词与播放同步，点击打开播放页，控制键直接操作播放服务。原厂桌面需提供标准小部件入口。
+- **K 歌跟唱**：播放页麦克风图标开启后，在每行原歌词上方显示发音，封面、歌词布局和字号沿用普通播放。发音图标选择语言或显隐；日语 / 韩语可自动识别，粤语手动选择并按歌曲保存。发音和翻译独立控制，顺序为发音、原文、译文。歌词菜单保留单句循环；有逐词时间时跟随高亮，歌词内容与发音均使用缓存。
 
 封面采用播放服务与界面共享的内存 / 磁盘缓存，同图请求合并，切页和重启可复用。歌曲优先使用服务端提供的歌曲封面；专辑缺图时回退到专辑内歌曲封面。列表按账号、筛选、排序和页码缓存，切换页面保留已加载歌曲与滚动位置；手动「刷新当前页面」可更新曲库。缓存标记在现有列表上就地更新。完整音频再次播放直接复用；截断响应和局部流不会被标作已缓存。
 
 歌词缓存 30 天；确认没有歌词的结果缓存 6 小时；失败不覆盖成功内容，手动刷新位于播放页 ⋯。空白时间点保留在原始歌词中，显示列表直接跳过，不留空行、不补符号；长按可见歌词仍跳转到对应原时间。原文自带符号保留。歌词区省略“歌词”标题和无译文提示，仅用翻译图标表达状态。修改本地歌词不会改写 Emby 标签。纯文本歌词没有同步时间轴；独立纯文本译文需与原文行数一致。
 
-完整行为和限制见 [功能盘点](docs/FEATURES.md)，测试记录见 [0.6.2 验证说明](docs/VALIDATION-0.6.2.md)。
+完整行为和限制见 [功能盘点](docs/FEATURES.md)，测试记录见 [0.7.1 验证说明](docs/VALIDATION-0.7.1.md)。
 
 已按 [车机界面设计文档](docs/UI-DESIGN.md) 实施。示例界面使用本地 fixture 数据：[曲库](docs/screenshots/library-light-0.3-fixture.png) · [播放页](docs/screenshots/player-0.3-fixture.png) · [队列](docs/screenshots/queue-0.3-fixture.png)。
 
@@ -79,6 +83,7 @@ $env:JAVA_HOME='C:/Program Files/Java/jdk-21.0.11'
 ./tools/test.ps1 -Serial emulator-5556 -Flavor cs11 -Adb D:/Android/Sdk/platform-tools/adb.exe
 ./tools/test.ps1 -Serial emulator-5556 -Flavor cs11 -Adb D:/Android/Sdk/platform-tools/adb.exe -Features
 ./tools/test.ps1 -Serial emulator-5556 -Flavor cs11 -Adb D:/Android/Sdk/platform-tools/adb.exe -Ui
+./tools/test.ps1 -Serial emulator-5556 -Flavor cs11 -Adb D:/Android/Sdk/platform-tools/adb.exe -WidgetsKaraoke
 ./tools/test.ps1 -Serial emulator-5556 -Flavor cs11 -Adb D:/Android/Sdk/platform-tools/adb.exe -Cache
 ./tools/test.ps1 -Serial emulator-5556 -Flavor cs11 -Adb D:/Android/Sdk/platform-tools/adb.exe -CachePolicy
 ```

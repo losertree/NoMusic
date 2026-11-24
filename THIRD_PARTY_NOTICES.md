@@ -2,6 +2,28 @@
 
 NoMusic's application code was independently implemented. Embysic and StreamMusic were consulted as functional references. The layout, dark palette, home shortcuts, and bottom player of fn-music-desktop (https://github.com/guihaiwang/fn-music-desktop, reference commit `3a16539916018cd0707a04af81caf1dc91c4b796`) were consulted as visual references. No client source code, icons, screenshots, or artwork from those projects is included in NoMusic.
 
+## Offline pronunciation (0.7.0)
+
+### Cantonese Jyutping dictionary
+
+- Source: [CanCLID / Rime Cantonese](https://github.com/rime/rime-cantonese), pinned revision `259f0e48bba840c3a2e0d117539e96937f3d89bc`.
+- Attribution: Cantonese Computational Linguistics Infrastructure Development Workgroup (CanCLID) and contributors.
+- Inputs: `jyut6ping3.chars.dict.yaml` and `jyut6ping3.words.dict.yaml`, licensed CC BY 4.0. The ODbL-licensed `jyut6ping3.maps` database is not used.
+- NoMusic changes: choose the highest-weight character reading where supplied, keep the first phrase reading, limit phrases to eight characters, add simplified-character variants, sort and gzip the resulting 195,915-entry lexicon into `assets/pronunciation/jyutping.lex`. This derived dictionary remains CC BY 4.0; the application's MIT license does not replace its license.
+- Full license: [cantonese-cc-by-4.0.txt](app/src/main/assets/licenses/cantonese-cc-by-4.0.txt), also distributed inside the APK. Rebuild: `tools/prepare_pronunciation.py`.
+
+Simplified variants use [OpenCC](https://github.com/BYVoid/OpenCC) `TSCharacters.txt`, pinned revision `fae2a0a911c30764e669a7d8b0591cd8e852934a`, copyright the OpenCC contributors, Apache-2.0. The first simplified variant is selected. Full license: [opencc-apache-2.0.txt](app/src/main/assets/licenses/opencc-apache-2.0.txt).
+
+### Kuromoji 0.9.0 and IPADIC
+
+- Source: https://github.com/atilika/kuromoji/tree/0.9.0
+- Maven coordinates: `com.atilika.kuromoji:kuromoji-core:0.9.0` and `com.atilika.kuromoji:kuromoji-ipadic:0.9.0`.
+- Copyright 2010–2015 Atilika Inc. and contributors. Apache License 2.0: [kuromoji-apache-2.0.txt](app/src/main/assets/licenses/kuromoji-apache-2.0.txt).
+- Three adapted source files retain Apache-2.0 attribution: the two `com.atilika.kuromoji.io` helpers replace single channel reads with `DataInputStream.readFully` and validate array lengths; `StringValueMapBuffer` uses `Charset.forName("UTF-8")` instead of API 19's `StandardCharsets`. The Gradle build excludes those three upstream classes from the core JAR; the rest of the analyzer and dictionary are unchanged.
+- IPADIC contains NAIST / ICOT dictionary data. Its complete notices are retained in [kuromoji-ipadic-notice.txt](app/src/main/assets/licenses/kuromoji-ipadic-notice.txt), included inside the APK. Upstream JAR notices and contributor files are also preserved.
+
+Korean romanization and kana-to-romaji conversion were implemented for NoMusic without an online pronunciation service.
+
 ## Conscrypt 2.5.2
 
 - Source: https://github.com/google/conscrypt/tree/2.5.2

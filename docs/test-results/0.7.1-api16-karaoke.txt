@@ -1,0 +1,75 @@
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=1
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: stream=
+
+com.nomusic.app.WidgetKaraokeTest:
+
+INSTRUMENTATION_STATUS: numtests=2
+
+INSTRUMENTATION_STATUS: test=testKaraokeReadingsAndTranslationCanBeToggledIndependently
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=1
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=2
+
+INSTRUMENTATION_STATUS: test=testKaraokeReadingsAndTranslationCanBeToggledIndependently
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=2
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.UiScenarioTest
+
+INSTRUMENTATION_STATUS: stream=
+
+com.nomusic.app.UiScenarioTest:
+
+INSTRUMENTATION_STATUS: numtests=2
+
+INSTRUMENTATION_STATUS: test=testKaraokeKeepsPlayerLayoutAndShowsReadingsAboveLyrics
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: current=2
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.UiScenarioTest
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: numtests=2
+
+INSTRUMENTATION_STATUS: test=testKaraokeKeepsPlayerLayoutAndShowsReadingsAboveLyrics
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_RESULT: stream=
+
+Test results for NoMusicTestRunner=..
+
+Time: 7.287
+
+
+
+OK (2 tests)
+
+
+
+
+
+INSTRUMENTATION_CODE: -1

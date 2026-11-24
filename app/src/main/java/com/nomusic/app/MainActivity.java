@@ -134,13 +134,15 @@ public final class MainActivity extends Activity {
     private LyricsView.Bookmark lyricBookmark;
     private String lyricBookmarkTrack="";
     private boolean restoreLyricBookmark;
+    private boolean karaoke;
+    private IconView karaokeIcon;
 
     private final ServiceConnection connection=new ServiceConnection() {
         @Override public void onServiceConnected(ComponentName name,IBinder binder) {
             playback=((PlaybackService.LocalBinder)binder).service();
             updatePlayer();
             if("queue".equals(section) && shell) showQueue();
-            if(restoreAtStartup){restoreAtStartup=false;if(shell&&playback.current()!=null)showLyrics();}
+            if(restoreAtStartup){restoreAtStartup=false;if(shell&&(playback.current()!=null||getIntent().getBooleanExtra("open_player",false)))showLyrics();}
         }
         @Override public void onServiceDisconnected(ComponentName name) { playback=null; }
     };
@@ -178,6 +180,7 @@ public final class MainActivity extends Activity {
         super.onCreate(state);
         prefs=new AppPrefs(this); client=new EmbyClient(prefs); images=new ImageLoader();lyrics=LyricsRepository.get(this);audioCache=AudioCache.get(this);
         motion=new UiMotion(prefs);
+        karaoke=getIntent().getBooleanExtra("karaoke",false);
         if(prefs.hasAccount()&&!prefs.loggedIn())expiredMessage="请重新登录 Emby，或播放已下载的歌曲。";
         getWindow().setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         registerReceiver(changes,new IntentFilter(PlaybackService.CHANGED));
@@ -217,7 +220,11 @@ public final class MainActivity extends Activity {
         if(focused)setFullscreen(shell&&"player".equals(section));
     }
 
-    @Override protected void onNewIntent(Intent intent) { super.onNewIntent(intent);setIntent(intent);updatePlayer();if(shell&&intent.getBooleanExtra("cache_settings",false))navigate("settings"); }
+    @Override protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);setIntent(intent);updatePlayer();
+        if(shell&&intent.getBooleanExtra("cache_settings",false))navigate("settings");
+        else if(shell&&intent.getBooleanExtra("open_player",false)){if(intent.getBooleanExtra("karaoke",false))karaoke=true;showLyrics();applyKaraoke();}
+    }
 
     private int dp(float value) { return Ui.dp(this,value); }
     private TextView text(String value,int size,int color,boolean bold) { return Ui.text(this,value,size,color,bold); }
@@ -1131,7 +1138,7 @@ public final class MainActivity extends Activity {
             timeline.addView(positionText,new LinearLayout.LayoutParams(dp(56),-1));seek=new TimelineSeekBar(this);seek.setMax(1000);seek.setContentDescription("播放进度");
             seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
                 @Override public void onStartTrackingTouch(SeekBar b){dragging=true;}
-                @Override public void onStopTrackingTouch(SeekBar b){if(playback!=null)playback.seek(playback.duration()*b.getProgress()/1000L);dragging=false;}
+                @Override public void onStopTrackingTouch(SeekBar b){if(playback!=null){playback.clearPracticeLoop();playback.seek(playback.duration()*b.getProgress()/1000L);}dragging=false;}
                 @Override public void onProgressChanged(SeekBar b,int progress,boolean user){if(user&&playback!=null){long at=playback.duration()*progress/1000L;positionText.setText(MediaItem.time(at));if(nowLyrics!=null)nowLyrics.updatePosition(at);}}
             });
             timeline.addView(seek,new LinearLayout.LayoutParams(0,-1,1));timeline.addView(durationText,new LinearLayout.LayoutParams(dp(56),-1));playerPane.addView(timeline,new LinearLayout.LayoutParams(-1,dp(PlaybackControls.TIMELINE_DP)));
@@ -1188,6 +1195,7 @@ public final class MainActivity extends Activity {
         for(IconView icon:new IconView[]{favoriteIcon,shuffleIcon,downloadIcon,effectsIcon})if(icon!=null&&icon.getParent() instanceof View)
             ((View)icon.getParent()).setBackground(Ui.background(this,android.graphics.Color.TRANSPARENT,playerColors.SOFT,playerColors));
         if(full&&effectsIcon!=null)effectsIcon.setIcon("equalizer",playerColors.ACCENT);
+        if(full&&karaokeIcon!=null){karaokeIcon.setIcon("microphone",karaoke?playerColors.ACCENT:Ui.MUTED);((View)karaokeIcon.getParent()).setBackground(Ui.background(this,android.graphics.Color.TRANSPARENT,playerColors.SOFT,playerColors));}
         if(full&&nowQuality!=null){nowQuality.setTextColor(playerColors.ACCENT);nowQuality.setBackground(Ui.background(this,android.graphics.Color.TRANSPARENT,playerColors.SOFT,playerColors));}
         if(seek instanceof TimelineSeekBar)((TimelineSeekBar)seek).setPalette(playerColors);
         if(miniProgress!=null){
@@ -1265,6 +1273,7 @@ public final class MainActivity extends Activity {
         }
         if(miniProgress!=null){miniProgress.setProgress(progress);MediaItem item=playback.current();String state=playerState.getText().toString();String meta=item==null?"选择歌曲，开始聆听":(state.isEmpty()?"":state+" · ")+item.artist+" · "+MediaItem.time(position)+" / "+MediaItem.time(duration);if(!meta.contentEquals(playerArtist.getText()))playerArtist.setText(meta);playerArtist.setContentDescription(meta);}
         if("player".equals(section)&&nowLyrics!=null){
+            nowLyrics.setLoopStatus(playback.practiceActive());
             nowLyrics.updatePosition(dragging&&seek!=null?duration*seek.getProgress()/1000L:position);
             long left=playback.sleepRemaining();String timer=playback.sleepAfterTrack()?"本曲结束":left>0?MediaItem.time(left):"";
             if(!timer.contentEquals(nowTimer.getText())){
@@ -1305,6 +1314,9 @@ public final class MainActivity extends Activity {
         setting("播放页跟随封面","随封面调整播放按钮与背景；关闭后使用所选主题色","cover_colors",true,()->tintPlayer(artworkTint)).setId(R.id.cover_colors);
         setting("界面动画","轻量过渡与触控反馈；关闭后立即切换，遵循系统动画设置","ui_motion",true,()->{if(!prefs.bool("ui_motion",true))motion.finishAll();}).setId(R.id.ui_motion);
         settingsAction("歌词字号",v->lyricFont());settingsAction("悬浮歌词 · "+(prefs.bool("floating_lyrics",false)?"已开启":"已关闭"),v->{toggleFloatingLyrics();navigate("settings");});settingsAction("翻译服务设置",v->translationSettings());
+        settingsAction("桌面组件 · 竖版 / 卡片 / 控制条",v->widgetHelp()).setId(R.id.settings_widgets);
+        setting("组件发音辅助","桌面歌词显示当前歌曲的粤拼或罗马音；歌词语言在播放页选择","widget_pronunciation",true,null);
+        settingsAction("K 歌 · 跟唱与发音辅助",v->{karaoke=true;showLyrics();}).setId(R.id.settings_karaoke);
         settingsHeading("缓存与下载");audioCacheSetting=setting("自动缓存音频","播放时预缓存当前列表，满额后按最近播放时间替换最久未听的歌曲","audio_cache",true,()->{
             CachePreloader preloader=CachePreloader.get(this);
             if(!prefs.bool("audio_cache",true))preloader.suspend(false);
@@ -1325,6 +1337,7 @@ public final class MainActivity extends Activity {
         TextView account=text(prefs.username()+"\n"+prefs.server(),18,colors.MUTED,false);account.setLineSpacing(dp(6),1);Ui.pad(account,0,8,0,16);body.addView(account);
         settingsAction("退出当前账号",v->dialog(new AlertDialog.Builder(this,colors.light?AlertDialog.THEME_HOLO_LIGHT:AlertDialog.THEME_HOLO_DARK).setTitle("退出账号").setMessage("退出后停止播放，清除登录和播放队列；手动下载保留在此账号目录中。重新登录同一账号后可以继续使用。").setNegativeButton("取消",null).setPositiveButton("退出",(d,i)->logout())));
         settingsHeading("关于与更新");body.addView(text("NoMusic "+BuildConfig.VERSION_NAME,20,colors.TEXT,true));
+        settingsAction("开源与词库许可",v->openSourceNotices());
         setting("启动时检查更新","每天最多检查一次，安装由系统确认","check_updates",true,null);settingsAction("检查更新",v->checkUpdate(true));
         settingsAction("车机适配信息",v->dialog(new AlertDialog.Builder(this,colors.light?AlertDialog.THEME_HOLO_LIGHT:AlertDialog.THEME_HOLO_DARK).setTitle("车机适配").setMessage((getPackageName().equals("com.netease.cloudmusic")?"CS11 兼容版":"标准版")+"\nAndroid 4.1+ · 标准媒体按键\n"+getPackageName()).setPositiveButton("关闭",null)));
     }
@@ -1465,6 +1478,7 @@ public final class MainActivity extends Activity {
     }
 
     private void leavePlayer(Runnable destination){
+        if(playback!=null)playback.clearPracticeLoop();
         if(pendingPlayerExit!=null)return;
         if(nowRoot==null){destination.run();return;}
         pendingPlayerExit=destination;shellRoot.setVisibility(View.VISIBLE);
@@ -1488,6 +1502,8 @@ public final class MainActivity extends Activity {
         String source=playerBack==null?"播放队列":playerBack.name!=null?playerBack.name:"songs".equals(playerBack.section)?"全部歌曲":"playlists".equals(playerBack.section)?"歌单":"downloads".equals(playerBack.section)?"离线歌曲":"播放队列";
         TextView title=text("来自 · "+source,20,colors.MUTED,false);title.setSingleLine(true);title.setEllipsize(TextUtils.TruncateAt.END);Ui.pad(title,12,0,6,0);top.addView(title,new LinearLayout.LayoutParams(0,-1,1));
         View viewToggle=iconButton("lyrics","显示封面",v->{if(playerStage!=null)playerStage.toggleView();});top.addView(viewToggle,new LinearLayout.LayoutParams(dp(48),-1));
+        karaokeIcon=new IconView(this,"microphone",colors.MUTED);
+        View karaokeButton=smallControl(karaokeIcon,"K 歌跟唱",v->{karaoke=!karaoke;applyKaraoke();});karaokeButton.setId(R.id.player_karaoke);top.addView(karaokeButton,new LinearLayout.LayoutParams(dp(48),-1));
         nowQuality=text("",14,colors.ACCENT,true);nowQuality.setId(R.id.player_quality);nowQuality.setGravity(Gravity.CENTER);nowQuality.setSingleLine(true);nowQuality.setEllipsize(TextUtils.TruncateAt.END);nowQuality.setMinWidth(dp(48));nowQuality.setMaxWidth(dp(182));
         Ui.pad(nowQuality,10,0,10,0);nowQuality.setFocusable(true);nowQuality.setOnClickListener(v->qualityMenu());Ui.press(nowQuality);
         top.addView(nowQuality,new LinearLayout.LayoutParams(-2,-1));updateNowQuality();
@@ -1508,7 +1524,8 @@ public final class MainActivity extends Activity {
         CoverPanel details=new CoverPanel(this,nowCover,nowTitle,links,nowStatus);
         nowLyrics=new LyricsView(this,prefs,SystemClock::elapsedRealtime,null);
         nowLyrics.setMoreListener(v->playerMenu());
-        nowLyrics.setSeekListener((p,v,index,id)->{long at=nowLyrics.seekPosition(index);if(at<0||playback==null)return false;playback.seek(at);return true;});
+        nowLyrics.setPronunciationListener(v->pronunciationMenu());
+        nowLyrics.setSeekListener((p,v,index,id)->{long at=nowLyrics.seekPosition(index);if(at<0||playback==null)return false;playback.clearPracticeLoop();playback.seek(at);return true;});
         playerPane=new LinearLayout(this){
             @Override protected void onMeasure(int ws,int hs){
                 int available=Math.max(0,MeasureSpec.getSize(hs)-getPaddingBottom());
@@ -1520,6 +1537,7 @@ public final class MainActivity extends Activity {
         };
         playerPane.setOrientation(LinearLayout.VERTICAL);buildPlayer();
         playerStage=new PlayerStage(this,top,details,nowLyrics,playerPane,viewToggle,nowQuality,timer,nowTimer);page.addView(playerStage,new FrameLayout.LayoutParams(-1,-1));
+        applyKaraoke();
         shellFrame.addView(page,new FrameLayout.LayoutParams(-1,-1));
         motion.playerOpen(page,playerStage,()->{if(nowRoot==page&&pendingPlayerExit==null)shellRoot.setVisibility(View.GONE);});
         playButton.requestFocus();updatePlayer();
@@ -1542,6 +1560,7 @@ public final class MainActivity extends Activity {
         nowAlbum.setVisibility(item.album.isEmpty()?View.GONE:View.VISIBLE);nowStatus.setText(playerState.getText());
         if(item.id.equals(nowTrack))return;
         nowTrack=item.id;baseLyrics=null;lyricEdits=LyricsEdits.EMPTY;
+        nowLyrics.setMessage("正在加载歌词…");nowLyrics.setPronunciationScope(PronunciationRepository.scope(client,item));
         if(item.sourceAudio.bitrate==0)loadNowBitrate(item);
         images.load(client,item,nowCover,(bitmap,tint)->{if(!destroyed&&nowRoot!=null&&item.id.equals(nowTrack)){tintPlayer(tint);updatePlayer();nowCover.setAlpha(0f);nowCover.animate().alpha(1f).setDuration(200).start();}});
         nowLyrics.setOffset(0);loadLyrics(item,false);
@@ -1582,6 +1601,7 @@ public final class MainActivity extends Activity {
         lyricRequest=lyrics.load(snapshot,item,force,result->{
             if(!sameLyrics(target,item,snapshot))return;
             baseLyrics=result;applyLyrics();
+            if(force)sendBroadcast(new Intent(MusicWidgets.REFRESH).setPackage(getPackageName()));
             if(force)toast(!result.error.isEmpty()?(result.text.isEmpty()?"刷新失败，请检查网络后重试":"刷新失败，已保留缓存歌词"):result.text.isEmpty()?"服务器暂无可用歌词":"歌词已刷新");
         });
         if(!force)async(()->{
@@ -1605,6 +1625,9 @@ public final class MainActivity extends Activity {
     private void playerMenu() {
         MediaItem item=playback==null?null:playback.current();
         LinkedHashMap<String,Runnable> choices=new LinkedHashMap<>();
+        choices.put(karaoke?"退出 K 歌跟唱":"进入 K 歌跟唱",()->{karaoke=!karaoke;applyKaraoke();});
+        choices.put("发音辅助与歌词语言",this::pronunciationMenu);
+        if(karaoke)choices.put(playback!=null&&playback.practiceActive()?"关闭单句循环":"循环练习当前句",this::togglePracticeLoop);
         if(item!=null) {
             choices.put("歌词时间偏移",()->lyricOffset(item));
             choices.put("编辑歌词与独立译文",()->editLyrics(item));
@@ -1614,6 +1637,44 @@ public final class MainActivity extends Activity {
         choices.put("歌词字号",this::lyricFont);
         choices.put(prefs.bool("floating_lyrics",false)?"关闭悬浮歌词":"开启悬浮歌词",this::toggleFloatingLyrics);
         actions("歌词设置",choices);
+    }
+
+    private void applyKaraoke(){
+        if(nowLyrics==null||playerStage==null)return;
+        nowLyrics.setKaraoke(karaoke);
+        if(karaokeIcon!=null){karaokeIcon.setIcon("microphone",karaoke?playerColors.ACCENT:Ui.MUTED);((View)karaokeIcon.getParent()).setSelected(karaoke);((View)karaokeIcon.getParent()).setContentDescription(karaoke?"退出 K 歌跟唱":"进入 K 歌跟唱");}
+        if(!karaoke&&playback!=null)playback.clearPracticeLoop();
+        nowLyrics.setLoopStatus(playback!=null&&playback.practiceActive());
+    }
+    private void togglePracticeLoop(){
+        if(playback==null||nowLyrics==null)return;
+        if(playback.practiceActive()){playback.clearPracticeLoop();nowLyrics.setLoopStatus(false);return;}
+        if(!playback.practiceLoop(nowLyrics.document(),nowLyrics.currentCue(),lyricEdits.offset)){toast(nowLyrics.document().timed?"播放到要练习的歌词后再开启循环":"纯文本歌词没有时间轴，无法单句循环");return;}
+        nowLyrics.setLoopStatus(true);toast("已循环当前句，长按其他歌词可跳转");
+    }
+    private void pronunciationMenu(){
+        MediaItem item=playback==null?null:playback.current();if(item==null){toast("请先选择歌曲");return;}
+        String scope=PronunciationRepository.scope(client,item);
+        PronunciationEngine.Language current=PronunciationRepository.language(prefs,scope);
+        LinkedHashMap<String,Runnable> choices=new LinkedHashMap<>();
+        for(PronunciationEngine.Language language:PronunciationEngine.Language.values())choices.put((language==current?"✓ ":"")+language.label,()->{
+            PronunciationRepository.setLanguage(prefs,scope,language);prefs.setBool(karaoke?"karaoke_pronunciation":"lyrics_pronunciation",true);if(nowLyrics!=null)nowLyrics.refreshPronunciation();
+        });
+        String enabled=karaoke?"karaoke_pronunciation":"lyrics_pronunciation";
+        choices.put(prefs.bool(enabled,karaoke)?"隐藏发音":"显示发音",()->{prefs.setBool(enabled,!prefs.bool(enabled,karaoke));if(nowLyrics!=null)nowLyrics.refreshPronunciation();});
+        choices.put("发音说明",()->dialog(new AlertDialog.Builder(this).setTitle("跟唱发音辅助").setMessage("粤语显示粤拼（数字为声调），日语显示罗马音并按词组读取汉字，韩语显示含常见连音的罗马音。\n\n自动识别日语假名与韩文；汉字歌词请手动选粤语。语言按歌曲保存，发音在本机生成并缓存。\n\n专名、多音字和演唱中的特殊读音可能需要对照原唱。有逐词时间时同步高亮，普通 LRC 按句高亮。").setPositiveButton("知道了",null)));
+        actions("发音语言 · "+current.label,choices);
+    }
+    private void widgetHelp(){
+        dialog(new AlertDialog.Builder(this).setTitle("添加 NoMusic 桌面组件").setMessage("长按桌面空白处 → 小部件 → NoMusic，选择竖版歌词、歌词卡片或播放控制条。\n\nCS11 建议选竖版歌词，拖动边缘至约三分之一屏宽和桌面全高；桌面网格决定最终尺寸。支持拖动调整大小。\n\n组件支持播放、暂停、上下首，点击封面或歌词进入播放页；竖版和卡片可直接打开 K 歌。无需悬浮窗权限。\n\n若原厂桌面没有“小部件”入口，需要支持标准 Android 小部件的桌面才能添加。").setPositiveButton("知道了",null));
+    }
+    private void openSourceNotices(){
+        async(()->{
+            try(java.io.InputStream input=getAssets().open("licenses/pronunciation-notices.txt")){
+                String notice=new String(StorageFiles.read(input,64*1024),"UTF-8");
+                onUi(()->dialog(new AlertDialog.Builder(this,colors.light?AlertDialog.THEME_HOLO_LIGHT:AlertDialog.THEME_HOLO_DARK).setTitle("开源与词库许可").setMessage(notice).setPositiveButton("知道了",null)));
+            }catch(Exception failure){onUi(()->toast("无法读取许可说明"));}
+        });
     }
 
     private void lyricOffset(MediaItem item) {

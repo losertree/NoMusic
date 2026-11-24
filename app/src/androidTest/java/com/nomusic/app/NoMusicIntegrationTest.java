@@ -253,8 +253,8 @@ public final class NoMusicIntegrationTest extends InstrumentationTestCase {
                 view.measure(View.MeasureSpec.makeMeasureSpec(640,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(400,View.MeasureSpec.EXACTLY));view.layout(0,0,640,400);
                 ListView list=(ListView)view.findViewById(R.id.lyrics_list);View toggle=view.findViewById(R.id.lyrics_translation);
                 view.updatePosition(1500);LinearLayout row=(LinearLayout)list.getAdapter().getView(0,null,list);
-                assertTrue(row.isSelected());assertEquals(Ui.TEXT,((TextView)row.getChildAt(0)).getCurrentTextColor());assertEquals(View.VISIBLE,row.getChildAt(1).getVisibility());
-                toggle.performClick();assertFalse(prefs.bool("lyrics_translation",true));row=(LinearLayout)list.getAdapter().getView(0,row,list);assertEquals(View.GONE,row.getChildAt(1).getVisibility());
+                assertTrue(row.isSelected());assertEquals(Ui.TEXT,((TextView)row.findViewById(R.id.lyrics_original)).getCurrentTextColor());assertEquals(View.VISIBLE,row.findViewById(R.id.lyrics_translation_line).getVisibility());
+                toggle.performClick();assertFalse(prefs.bool("lyrics_translation",true));row=(LinearLayout)list.getAdapter().getView(0,row,list);assertEquals(View.GONE,row.findViewById(R.id.lyrics_translation_line).getVisibility());
                 assertFalse(new LyricsView(context,prefs).findViewById(R.id.lyrics_translation).isSelected());
                 view.updatePosition(6000);assertTrue(list.getAdapter().getView(1,null,list).isSelected());assertFalse(list.getAdapter().getView(0,null,list).isSelected());
                 view.updatePosition(1500);assertTrue(list.getAdapter().getView(0,null,list).isSelected());
@@ -267,9 +267,9 @@ public final class NoMusicIntegrationTest extends InstrumentationTestCase {
                 assertFalse(list.getAdapter().getView(0,null,list).isSelected());
                 view.setResult(new LyricsRepository.Result("[00:00]原有歌词\n[00:04]\n[00:06]♪ 原文已有的音符", ""));
                 view.updatePosition(4500);assertEquals(2,list.getAdapter().getCount());LinearLayout priorRow=(LinearLayout)list.getAdapter().getView(0,null,list);
-                assertEquals("原有歌词",((TextView)priorRow.getChildAt(0)).getText().toString());assertTrue(priorRow.isSelected());assertEquals(6000L,view.seekPosition(1));
+                assertEquals("原有歌词",((TextView)priorRow.findViewById(R.id.lyrics_original)).getText().toString());assertTrue(priorRow.isSelected());assertEquals(6000L,view.seekPosition(1));
                 assertEquals(View.GONE,view.findViewById(R.id.lyrics_status).getVisibility());
-                LinearLayout authentic=(LinearLayout)list.getAdapter().getView(1,null,list);assertEquals("♪ 原文已有的音符",((TextView)authentic.getChildAt(0)).getText().toString());
+                LinearLayout authentic=(LinearLayout)list.getAdapter().getView(1,null,list);assertEquals("♪ 原文已有的音符",((TextView)authentic.findViewById(R.id.lyrics_original)).getText().toString());
                 view.updatePosition(6500);assertTrue(list.getAdapter().getView(1,null,list).isSelected());
                 view.setMessage("加载失败");assertEquals(0,list.getAdapter().getCount());
             });

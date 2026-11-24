@@ -8,6 +8,7 @@ param(
     [switch]$Cache,
     [switch]$CachePolicy,
     [switch]$Ui,
+    [switch]$WidgetsKaraoke,
     [switch]$Update,
     [switch]$SkipBuild
 )
@@ -56,7 +57,7 @@ try {
     $testApk = "app\build\outputs\apk\androidTest\$Flavor\debug\app-$Flavor-debug-androidTest.apk"
     Invoke-Native -File $Adb -Arguments @('-s', $Serial, 'install', '-r', $apk)
     Invoke-Native -File $Adb -Arguments @('-s', $Serial, 'install', '-r', $testApk)
-    $testClass = if ($SavedLyrics) { 'com.nomusic.app.LiveLyricsTest' } elseif ($Live) { 'com.nomusic.app.LiveServerTest' } elseif ($CachePolicy) { 'com.nomusic.app.AudioCachePolicyTest' } elseif ($Cache) { 'com.nomusic.app.CacheIntegrationTest' } elseif ($Features) { 'com.nomusic.app.FeatureIntegrationTest' } elseif ($Ui) { 'com.nomusic.app.UiScenarioTest' } elseif ($Update) { 'com.nomusic.app.UpdateIntegrationTest' } else { 'com.nomusic.app.NoMusicIntegrationTest' }
+    $testClass = if ($SavedLyrics) { 'com.nomusic.app.LiveLyricsTest' } elseif ($Live) { 'com.nomusic.app.LiveServerTest' } elseif ($CachePolicy) { 'com.nomusic.app.AudioCachePolicyTest' } elseif ($Cache) { 'com.nomusic.app.CacheIntegrationTest' } elseif ($Features) { 'com.nomusic.app.FeatureIntegrationTest' } elseif ($WidgetsKaraoke) { 'com.nomusic.app.WidgetKaraokeTest' } elseif ($Ui) { 'com.nomusic.app.UiScenarioTest' } elseif ($Update) { 'com.nomusic.app.UpdateIntegrationTest' } else { 'com.nomusic.app.NoMusicIntegrationTest' }
     $remote = 'am instrument -w -r -e class ' + $testClass
     if ($Live) {
         if (!$env:NOMUSIC_TEST_SERVER -or !$env:NOMUSIC_TEST_USER) { throw 'Set NOMUSIC_TEST_SERVER, NOMUSIC_TEST_USER, and NOMUSIC_TEST_PASSWORD for the live check.' }
@@ -67,7 +68,7 @@ try {
     $remote += ' ' + $package + '.test/com.nomusic.app.NoMusicTestRunner'
     $result = Invoke-Native -File $Adb -Arguments @('-s', $Serial, 'shell', $remote)
     $result | Write-Output
-    $log = Join-Path $projectRoot ("build\test-$Flavor-$Serial" + $(if ($SavedLyrics) { '-lyrics-live' } elseif ($Live) { '-live' } elseif ($CachePolicy) {'-cache-policy'} elseif ($Cache) {'-cache'} elseif ($Features) {'-features'} elseif ($Ui) {'-ui'} elseif ($Update) {'-update'} else { '' }) + '.txt')
+    $log = Join-Path $projectRoot ("build\test-$Flavor-$Serial" + $(if ($SavedLyrics) { '-lyrics-live' } elseif ($Live) { '-live' } elseif ($CachePolicy) {'-cache-policy'} elseif ($Cache) {'-cache'} elseif ($Features) {'-features'} elseif ($WidgetsKaraoke) {'-widgets-karaoke'} elseif ($Ui) {'-ui'} elseif ($Update) {'-update'} else { '' }) + '.txt')
     $result | Set-Content -LiteralPath $log -Encoding utf8
     if (($result -join "`n") -notmatch 'OK \(\d+ tests?\)') { throw ('Instrumentation failed; see ' + $log) }
 } finally {

@@ -76,6 +76,12 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
     private Bitmap cover;
     private final SystemArtwork systemArtwork=new SystemArtwork();
     private final AudioEffects effects=new AudioEffects();
+    private MusicWidgets widgets;
+    private final LyricLoop practice=new LyricLoop();
+    private String practiceTrack="";
+    private final BroadcastReceiver widgetChanges=new BroadcastReceiver(){
+        @Override public void onReceive(Context context,Intent intent){if(widgets!=null)widgets.refresh();}
+    };
 
     private final BroadcastReceiver noisy=new BroadcastReceiver() {
         @Override public void onReceive(Context context, Intent intent) { transientResume=false; pause(); }
@@ -91,6 +97,7 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
     private final BroadcastReceiver sessions=new BroadcastReceiver() {
         @Override public void onReceive(Context context,Intent intent) {
             if(client.currentSession())return;
+            clearPracticeLoop();
             EmbyClient previous=client;
             stopTrack(false);cancelSleepInternal();waitingPage=false;pageLoading=false;++sourceGeneration;
             transientResume=false;audio.abandonAudioFocus(PlaybackService.this);
@@ -111,6 +118,8 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
     private final Runnable ticker=new Runnable() {
         @Override public void run() {
             long now=SystemClock.elapsedRealtime();
+            if(practice.active()&&(current()==null||!practiceTrack.equals(current().id)))clearPracticeLoop();
+            if(practice.active()&&desiredPlay&&prepared&&!buffering&&seekTarget<0&&practice.shouldSeek(position()))seek(practice.start);
             if(sleepAt!=0) {
                 if(now>=sleepAt) { cancelSleepInternal();stopPlayback(false); }
                 else if(fadeSleep)applyVolume(Math.max(0.05f,Math.min(1f,(sleepAt-now)/8000f)));
@@ -129,7 +138,8 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
             if((desiredPlay||waitingPage)&&!waitingNetwork&&shouldPrefetch())loadMore();
             if (isPlaying() && now-lastPersist >= 5000) { persist(); lastPersist=now; }
             if (isPlaying() && now-lastReport >= 10000) { report("/Progress"); lastReport=now; }
-            handler.postDelayed(this, 1000);
+            if(widgets!=null)widgets.update(false);
+            handler.postDelayed(this, practice.active()?150:1000);
         }
     };
 
@@ -156,6 +166,9 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
         lastOnline=online();
         preloader.network(lastOnline);
         restore();
+        widgets=new MusicWidgets(this);
+        registerReceiver(widgetChanges,new IntentFilter(MusicWidgets.REFRESH));
+        widgets.update(true);
         if (current()!=null) { registerRemote(); updateMetadata(); }
         handler.post(ticker);
     }
@@ -170,8 +183,8 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
         else if (NEXT.equals(action)) next(false);
         else if (PREVIOUS.equals(action)) previous();
         else if (STOP.equals(action)) stopPlayback(false);
-        else if (FORWARD.equals(action)) seek(position()+15000);
-        else if (REWIND.equals(action)) seek(position()-15000);
+        else if (FORWARD.equals(action)) {clearPracticeLoop();seek(position()+15000);}
+        else if (REWIND.equals(action)) {clearPracticeLoop();seek(position()-15000);}
         return START_STICKY;
     }
 
@@ -198,6 +211,12 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
     public boolean shuffle() { return shuffle; }
     public int repeat() { return repeat; }
     public Bitmap cover() { return cover; }
+    boolean practiceLoop(LyricsDocument document,int cue,int lyricOffset){
+        if(current()==null||!practice.set(document,cue,lyricOffset,duration()))return false;
+        practiceTrack=current().id;seek(practice.start);return true;
+    }
+    boolean practiceActive(){return practice.active();}
+    void clearPracticeLoop(){practice.clear();practiceTrack="";}
     public long duration() {
         if (current()!=null && current().durationMs>0) return current().durationMs;
         try { return prepared && player!=null?Math.max(0,player.getDuration())+offset:0; }
@@ -216,6 +235,7 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
     void playQueue(List<MediaItem> items,int selected,QueueSource continuation) {
         if (selected<0 || selected>=items.size() || !items.get(selected).isAudio()) return;
         if(!prefs.hasAccount())return;
+        clearPracticeLoop();
         stopTrack();
         client=new EmbyClient(prefs);
         queue.clear();index=-1;
@@ -234,6 +254,7 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
 
     public void select(int selected) {
         if (selected<0 || selected>=queue.size()) return;
+        clearPracticeLoop();
         MediaItem previous=current();
         stopTrack();waitingPage=false;pageRetryAt=0;
         index=selected;priority.remove(current());shuffled.add(current());queueRevision++;
@@ -266,6 +287,7 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
     }
 
     public void next(boolean completed) {
+        if(!completed)clearPracticeLoop();
         if(queue.isEmpty()) return;
         if(completed&&sleepAfter) {
             cancelSleepInternal();stopTrack();savedPosition=0;stopPlayback(false);return;
@@ -308,6 +330,7 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
     }
 
     public void previous() {
+        clearPracticeLoop();
         if(current()==null) return;
         if(position()>3000&&!waitingNetwork&&!waitingPage) { seek(0); return; }
         int selected;
@@ -536,6 +559,7 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
             });
             player.setOnCompletionListener(mp -> {
                 if(ticket!=generation||!desiredPlay)return;
+                if(practice.active()&&!sleepAfter){seek(practice.start);if(prepared&&player!=null&&desiredPlay)player.start();return;}
                 long last=Math.max(savedPosition,position());
                 if(local==null&&duration()>0&&last+5000<duration())streamFailed(last,true);
                 else next(true);
@@ -617,6 +641,7 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
     }
 
     public void stopPlayback(boolean clearQueue) {
+        clearPracticeLoop();
         transientResume=false;waitingPage=false;cancelSleepInternal();
         stopTrack(); error=""; audio.abandonAudioFocus(this);
         if(clearQueue) {
@@ -696,6 +721,7 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
         remote.setPlaybackState(state);
         if(current()!=null && (desiredPlay || player!=null || !error.isEmpty()&&client.authenticated())) updateNotification();
         sendBroadcast(new Intent(CHANGED).setPackage(getPackageName()));
+        if(widgets!=null)widgets.update(true);
         for(String prefix:new String[]{"com.android.music",getPackageName()}) {
             for(String event:new String[]{".metachanged",".playstatechanged"}) {
                 Intent intent=new Intent(prefix+event);
@@ -756,10 +782,12 @@ public final class PlaybackService extends Service implements AudioManager.OnAud
 
     @Override public void onDestroy() {
         persist(); stopTrack();
+        if(widgets!=null){widgets.update(true);widgets.close();}
         preloader.playback(client,queue,index,queueRevision,false,false);
         handler.removeCallbacksAndMessages(null);
         unregisterReceiver(noisy);
         unregisterReceiver(network);unregisterReceiver(sessions);unregisterReceiver(cached);
+        unregisterReceiver(widgetChanges);
         if(registered) { audio.unregisterMediaButtonEventReceiver(mediaReceiver); audio.unregisterRemoteControlClient(remote); }
         audio.abandonAudioFocus(this);
         reports.shutdown();artwork.shutdownNow();pages.shutdownNow();stopForeground(true);

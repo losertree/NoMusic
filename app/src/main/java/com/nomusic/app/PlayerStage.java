@@ -23,7 +23,7 @@ final class PlayerStage extends ViewGroup {
         int w=MeasureSpec.getSize(ws),h=MeasureSpec.getSize(hs);float density=getResources().getDisplayMetrics().density;
         float width=w/density,height=h/density;boolean wide=width>=1100&&height>=640;
         split=width>=800&&height>=480;viewToggle.setVisibility(split?GONE:VISIBLE);
-        quality.setVisibility(width<520?GONE:VISIBLE);timer.setVisibility(width<360?GONE:VISIBLE);
+        quality.setVisibility(width<640?GONE:VISIBLE);timer.setVisibility(width<360?GONE:VISIBLE);
         timerValue.setVisibility(width>=600&&timerValue.length()>0?VISIBLE:GONE);
         edge=Math.min(w/2,dp(width<800?16:24));
         int idealDockHeight=dp(PlaybackControls.TIMELINE_DP)+dp(PlaybackControls.ROW_DP)+dp(PlaybackControls.BOTTOM_DP);

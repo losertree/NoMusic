@@ -1,0 +1,47 @@
+WARNING: linker: libdvm.so has text relocations. This is wasting memory and is a security risk. Please fix.
+
+INSTRUMENTATION_STATUS: numtests=1
+
+INSTRUMENTATION_STATUS: stream=
+
+com.nomusic.app.InstalledReleaseTest:
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testInstalledReleaseRetainsSessionQueueAndIsCurrent
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.InstalledReleaseTest
+
+INSTRUMENTATION_STATUS: current=1
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=1
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testInstalledReleaseRetainsSessionQueueAndIsCurrent
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.InstalledReleaseTest
+
+INSTRUMENTATION_STATUS: current=1
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_RESULT: stream=
+
+Test results for NoMusicTestRunner=.
+
+Time: 1.004
+
+
+
+OK (1 test)
+
+
+
+
+
+INSTRUMENTATION_CODE: -1

@@ -1,0 +1,21 @@
+<resources>
+    <string name="widget_tall_name">NoMusic · 竖版歌词</string>
+    <string name="widget_card_name">NoMusic · 歌词卡片</string>
+    <string name="widget_compact_name">NoMusic · 播放控制条</string>
+    <string name="widget_welcome">好音乐，在路上</string>
+    <string name="karaoke">K 歌</string>
+    <string name="open_karaoke">打开 K 歌跟唱</string>
+    <string name="current_cover">当前歌曲封面</string>
+    <string name="previous_track">上一首</string>
+    <string name="next_track">下一首</string>
+    <string name="play_track">播放</string>
+    <style name="WidgetControl">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:background">@drawable/widget_button</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+</resources>

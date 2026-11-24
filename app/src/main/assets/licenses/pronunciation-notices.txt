@@ -1,0 +1,25 @@
+NoMusic · 开源与发音词库许可
+
+NoMusic 应用代码：MIT。Kuromoji 的三份兼容修改文件保留 Apache-2.0 许可。
+项目与源码：https://github.com/losertree/NoMusic
+
+粤语词库：CanCLID / Cantonese Computational Linguistics Infrastructure Development Workgroup 及贡献者。
+来源：https://github.com/rime/rime-cantonese
+版本：259f0e48bba840c3a2e0d117539e96937f3d89bc
+使用 chars、words 字典，CC BY 4.0：https://creativecommons.org/licenses/by/4.0/
+修改：按权重或首项选择读音、限长、简体变体、排序及压缩。派生字典仍为 CC BY 4.0。
+
+简体变体数据：OpenCC 及贡献者，TSCharacters.txt。
+来源：https://github.com/BYVoid/OpenCC
+版本：fae2a0a911c30764e669a7d8b0591cd8e852934a
+许可：Apache-2.0。
+
+日语分词：Kuromoji 0.9.0，Copyright 2010–2015 Atilika Inc. and contributors，Apache-2.0。
+来源：https://github.com/atilika/kuromoji/tree/0.9.0
+修改：两份 I/O 工具改为完整读取，词典字符串使用兼容 API 16 的 UTF-8 字符集查找；分词和词典数据未改动。
+日语词典：mecab-ipadic-2.7.0-20070801，包含 NAIST / ICOT 数据和许可条件。
+
+HTTPS：Conscrypt 2.5.2（Apache-2.0）、BoringSSL 及其第三方许可。
+
+以上完整许可文本随 APK 分发于 assets/licenses；源码中的 THIRD_PARTY_NOTICES.md 列出对应文件和来源。
+韩文转写与假名转罗马音由 NoMusic 本地实现；没有在线发音服务。

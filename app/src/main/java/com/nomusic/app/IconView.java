@@ -32,6 +32,10 @@ public final class IconView extends View {
         paint.setColor(color); paint.setStrokeWidth(2); paint.setStrokeCap(Paint.Cap.ROUND); paint.setStrokeJoin(Paint.Join.ROUND); paint.setStyle(Paint.Style.STROKE);
         Path p=new Path();
         switch(icon) {
+            case "microphone":
+                c.drawRoundRect(new RectF(12,3,20,20),4,4,paint);c.drawArc(new RectF(8,9,24,25),0,180,false,paint);c.drawLine(8,14,8,17,paint);c.drawLine(24,14,24,17,paint);c.drawLine(16,25,16,29,paint);c.drawLine(11,29,21,29,paint);break;
+            case "pronunciation":
+                c.drawLine(4,24,9,8,paint);c.drawLine(9,8,15,24,paint);c.drawLine(6,19,13,19,paint);c.drawArc(new RectF(17,9,24,23),-75,150,false,paint);c.drawArc(new RectF(19,4,30,28),-75,150,false,paint);break;
             case "toggle_on": case "toggle_off":
                 c.drawRoundRect(new RectF(1,7,31,25),9,9,paint);paint.setStyle(Paint.Style.FILL);c.drawCircle("toggle_on".equals(icon)?23:9,16,6,paint);break;
             case "close": c.drawLine(7,7,25,25,paint);c.drawLine(25,7,7,25,paint);break;

@@ -10,13 +10,16 @@ android {
         applicationId 'com.nomusic.player'
         minSdk 16
         targetSdk 28
-        versionCode providers.gradleProperty('nomusicVersionCode').map { it.toInteger() }.getOrElse(14)
-        versionName providers.gradleProperty('nomusicVersionName').getOrElse('0.6.2')
+        versionCode providers.gradleProperty('nomusicVersionCode').map { it.toInteger() }.getOrElse(16)
+        versionName providers.gradleProperty('nomusicVersionName').getOrElse('0.7.1')
         testInstrumentationRunner 'com.nomusic.app.NoMusicTestRunner'
     }
 
     flavorDimensions += 'device'
     buildFeatures { buildConfig true }
+    packaging {
+        resources.merges += ['META-INF/CONTRIBUTORS.md', 'META-INF/LICENSE.md', 'META-INF/NOTICE.md']
+    }
     productFlavors {
         standard {
             dimension 'device'
@@ -49,9 +52,30 @@ android {
     }
 }
 
+configurations { kuromojiCore }
+
+// Kuromoji 0.9 assumes one channel read fills a buffer. Android 4 channels may
+// return a partial buffer. Keep the upstream dictionary and replace only the
+// I/O helpers with readFully implementations in src/main/java and use Charset
+// lookup for feature strings on Android API 16-18.
+def androidKuromojiCore = tasks.register('androidKuromojiCore', Jar) {
+    inputs.property('androidCompatibilityVersion', 2)
+    archiveFileName = 'kuromoji-core-0.9.0-android.jar'
+    destinationDirectory = layout.buildDirectory.dir('kuromoji')
+    from { zipTree(configurations.kuromojiCore.singleFile) }
+    exclude 'com/atilika/kuromoji/io/ByteBufferIO.class', 'com/atilika/kuromoji/io/IntegerArrayIO.class',
+            'com/atilika/kuromoji/buffer/StringValueMapBuffer.class'
+}
+
 dependencies {
     // Modern TLS on Android 4.x, including ARMv7 car units and x86 emulators.
     implementation 'org.conscrypt:conscrypt-android:2.5.2'
+    // Loaded lazily on a worker only when Japanese pronunciation is requested.
+    kuromojiCore 'com.atilika.kuromoji:kuromoji-core:0.9.0'
+    implementation('com.atilika.kuromoji:kuromoji-ipadic:0.9.0') {
+        exclude group: 'com.atilika.kuromoji', module: 'kuromoji-core'
+    }
+    implementation files(androidKuromojiCore)
     androidTestCompileOnly files("${android.sdkDirectory}/platforms/${android.compileSdkVersion}/optional/android.test.base.jar",
             "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/optional/android.test.runner.jar")
 }

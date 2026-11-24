@@ -29,10 +29,13 @@ final class LyricsEdits {
     void write(Context context,EmbyClient client,MediaItem item) throws Exception {
         if(!client.currentSession())return;
         File file=file(context,client,item);
-        if(original.isEmpty()&&translation.isEmpty()&&offset==0){if(file.exists()&&!file.delete())throw new java.io.IOException();return;}
+        if(original.isEmpty()&&translation.isEmpty()&&offset==0){if(file.exists()&&!file.delete())throw new java.io.IOException();notifyWidgets(context);return;}
         if(original.length()>LyricsRepository.MAX_TEXT||translation.length()>LyricsRepository.MAX_TEXT)throw new java.io.IOException();
         StorageFiles.writeJson(file,new JSONObject().put("original",original).put("translation",translation).put("offset",offset));
+        notifyWidgets(context);
     }
+
+    private static void notifyWidgets(Context context){context.sendBroadcast(new android.content.Intent(MusicWidgets.REFRESH).setPackage(context.getPackageName()));}
 
     LyricsRepository.Result apply(LyricsRepository.Result base) {
         String text=original.isEmpty()?base.text:original;

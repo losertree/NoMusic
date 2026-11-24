@@ -1,0 +1,383 @@
+WARNING: linker: libdvm.so has text relocations. This is wasting memory and is a security risk. Please fix.
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+com.nomusic.app.NoMusicIntegrationTest:
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testAddressNormalizationAndMediaKeys
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=1
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testAddressNormalizationAndMediaKeys
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=1
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testApiLyricTimestampsAndTranslationsArePreserved
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=2
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testApiLyricTimestampsAndTranslationsArePreserved
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=2
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testEmbeddedLyricsFallbackAndCacheVersion
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=3
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testEmbeddedLyricsFallbackAndCacheVersion
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=3
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testEmbyLoginPagingSearchCollectionsAndFavorites
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=4
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testEmbyLoginPagingSearchCollectionsAndFavorites
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=4
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testLoopbackProxyRangesAndPrivatePath
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=5
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testLoopbackProxyRangesAndPrivatePath
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=5
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testLyricsMemoryDiskDedupCancellationAndAccountIsolation
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=6
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testLyricsMemoryDiskDedupCancellationAndAccountIsolation
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=6
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testLyricsMissingExpiryErrorCooldownAndManualRetry
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=7
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testLyricsMissingExpiryErrorCooldownAndManualRetry
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=7
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testLyricsRefreshPersistenceStaleFallbackAndCacheRepair
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=8
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testLyricsRefreshPersistenceStaleFallbackAndCacheRepair
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=8
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testLyricsViewTranslationFollowingAndPlainTextFallback
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=9
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testLyricsViewTranslationFollowingAndPlainTextFallback
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=9
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testOnlineTranslationSkipsEmptyCuesAndKeepsTimeline
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=10
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testOnlineTranslationSkipsEmptyCuesAndKeepsTimeline
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=10
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testPlaybackButtonsFocusSeekingAndQueuePersistence
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=11
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testPlaybackButtonsFocusSeekingAndQueuePersistence
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=11
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testTimedLyricsDiskUpgradeAndTranslationReuse
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=12
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testTimedLyricsDiskUpgradeAndTranslationReuse
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=12
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testTimedLyricsSortingOffsetsTranslationsAndSeeking
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=13
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=13
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testTimedLyricsSortingOffsetsTranslationsAndSeeking
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.NoMusicIntegrationTest
+
+INSTRUMENTATION_STATUS: current=13
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_RESULT: stream=
+
+Test results for NoMusicTestRunner=.............
+
+Time: 23.364
+
+
+
+OK (13 tests)
+
+
+
+
+
+INSTRUMENTATION_CODE: -1

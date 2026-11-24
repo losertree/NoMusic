@@ -1,0 +1,271 @@
+WARNING: linker: libdvm.so has text relocations. This is wasting memory and is a security risk. Please fix.
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=
+
+com.nomusic.app.WidgetKaraokeTest:
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testAutoDetectionDoesNotGuessCantonese
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=1
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testAutoDetectionDoesNotGuessCantonese
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=1
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testCantoneseTraditionalSimplifiedAndWordReadings
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=2
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testCantoneseTraditionalSimplifiedAndWordReadings
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=2
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testJapaneseKanjiParticlesAndKana
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=3
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testJapaneseKanjiParticlesAndKana
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=3
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testKaraokeReadingsAndTranslationCanBeToggledIndependently
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=4
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testKaraokeReadingsAndTranslationCanBeToggledIndependently
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=4
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testKoreanLiaisonAndAssimilation
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=5
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testKoreanLiaisonAndAssimilation
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=5
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testPracticeRangeRespectsOffsetsAndTextLyrics
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=6
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testPracticeRangeRespectsOffsetsAndTextLyrics
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=6
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testPronunciationCacheCancellationAndSourceInvalidation
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=7
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testPronunciationCacheCancellationAndSourceInvalidation
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=7
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testThreeProvidersAndRemoteViewsAtCarSizes
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=8
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testThreeProvidersAndRemoteViewsAtCarSizes
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=8
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testWidgetTimelineKeepsBreaksAndOffset
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=9
+
+INSTRUMENTATION_STATUS_CODE: 1
+
+INSTRUMENTATION_STATUS: numtests=9
+
+INSTRUMENTATION_STATUS: stream=.
+
+INSTRUMENTATION_STATUS: id=InstrumentationTestRunner
+
+INSTRUMENTATION_STATUS: test=testWidgetTimelineKeepsBreaksAndOffset
+
+INSTRUMENTATION_STATUS: class=com.nomusic.app.WidgetKaraokeTest
+
+INSTRUMENTATION_STATUS: current=9
+
+INSTRUMENTATION_STATUS_CODE: 0
+
+INSTRUMENTATION_RESULT: stream=
+
+Test results for NoMusicTestRunner=.........
+
+Time: 1.544
+
+
+
+OK (9 tests)
+
+
+
+
+
+INSTRUMENTATION_CODE: -1

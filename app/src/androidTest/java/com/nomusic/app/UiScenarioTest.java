@@ -96,6 +96,65 @@ public final class UiScenarioTest extends InstrumentationTestCase {
         restore.commit();
     }
 
+    public void testKaraokeKeepsPlayerLayoutAndShowsReadingsAboveLyrics()throws Exception{
+        openFixturePlayer();
+        java.util.concurrent.atomic.AtomicReference<PlaybackService> player=new java.util.concurrent.atomic.AtomicReference<>();
+        java.util.concurrent.atomic.AtomicInteger repeat=new java.util.concurrent.atomic.AtomicInteger();
+        java.util.concurrent.atomic.AtomicReference<android.graphics.Rect> lyricBounds=new java.util.concurrent.atomic.AtomicReference<>(),coverBounds=new java.util.concurrent.atomic.AtomicReference<>();
+        java.util.concurrent.atomic.AtomicReference<View> originalView=new java.util.concurrent.atomic.AtomicReference<>();
+        java.util.concurrent.atomic.AtomicReference<Float> originalSize=new java.util.concurrent.atomic.AtomicReference<>();
+        main(()->{
+            PlaybackService service=(PlaybackService)field("playback");player.set(service);repeat.set(service.repeat());
+            LyricsView lyrics=(LyricsView)field("nowLyrics");View cover=(View)((View)field("nowCover")).getParent();originalView.set(lyrics);
+            lyricBounds.set(new android.graphics.Rect(lyrics.getLeft(),lyrics.getTop(),lyrics.getRight(),lyrics.getBottom()));coverBounds.set(new android.graphics.Rect(cover.getLeft(),cover.getTop(),cover.getRight(),cover.getBottom()));
+            ListView list=lyrics.findViewById(R.id.lyrics_list);View row=list.getAdapter().getView(0,null,list);originalSize.set(((TextView)row.findViewById(R.id.lyrics_original)).getTextSize());
+            assertTrue(activity.findViewById(R.id.player_karaoke).performClick());assertTrue((Boolean)field("karaoke"));
+            MediaItem item=service.current();String scope=PronunciationRepository.scope(new EmbyClient(prefs),item);PronunciationRepository.setLanguage(prefs,scope,PronunciationEngine.Language.JAPANESE);
+            lyrics.setResult(new LyricsRepository.Result("[00:01]君の名前を呼ぶ\n[00:04]明日へ続く歌\n[00:07]一緒に歩こう",""));lyrics.refreshPronunciation();service.seek(1200);lyrics.updatePosition(1200);
+        });
+        assertTrue(waitFor(()->hasText((View)field("nowLyrics"),"namae"),10000));
+        main(()->{
+            View lyrics=(View)field("nowLyrics"),cover=(View)((View)field("nowCover")).getParent();assertSame(originalView.get(),lyrics);
+            assertEquals(lyricBounds.get(),new android.graphics.Rect(lyrics.getLeft(),lyrics.getTop(),lyrics.getRight(),lyrics.getBottom()));assertEquals(coverBounds.get(),new android.graphics.Rect(cover.getLeft(),cover.getTop(),cover.getRight(),cover.getBottom()));assertEquals(View.VISIBLE,cover.getVisibility());
+            ListView list=lyrics.findViewById(R.id.lyrics_list);View row=list.getAdapter().getView(0,null,list);assertEquals(originalSize.get(),((TextView)row.findViewById(R.id.lyrics_original)).getTextSize(),.01f);
+            row.measure(View.MeasureSpec.makeMeasureSpec(lyrics.getWidth(),View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED));row.layout(0,0,row.getMeasuredWidth(),row.getMeasuredHeight());
+            assertTrue(row.findViewById(R.id.lyrics_reading).getBottom()<=row.findViewById(R.id.lyrics_original).getTop());
+            screenshot("karaoke-japanese-0.7.1-fixture.png");
+            call("playerMenu");android.app.AlertDialog menu=(android.app.AlertDialog)field("activeDialog");ListView choices=menu.getListView();int loop=-1;for(int i=0;i<choices.getCount();i++)if(choices.getItemAtPosition(i).toString().equals("循环练习当前句")){loop=i;break;}assertTrue("Loop practice must remain available in the lyrics menu",loop>=0);choices.performItemClick(null,loop,loop);assertTrue(player.get().practiceActive());
+        });
+        SystemClock.sleep(4200);
+        main(()->{
+            PlaybackService service=player.get();assertTrue(service.practiceActive());assertTrue("Practice range escaped: "+service.position(),service.position()<4500);assertEquals(repeat.get(),service.repeat());
+            activity.findViewById(R.id.player_karaoke).performClick();assertFalse((Boolean)field("karaoke"));assertFalse(service.practiceActive());
+            assertSame(originalView.get(),field("nowLyrics"));
+        });
+    }
+
+    public void testWidgetPendingIntentsControlTheExistingPlayer()throws Exception{
+        openFixturePlayer();
+        java.util.concurrent.atomic.AtomicReference<PlaybackService> service=new java.util.concurrent.atomic.AtomicReference<>();
+        java.util.concurrent.atomic.AtomicReference<View> widget=new java.util.concurrent.atomic.AtomicReference<>();
+        main(()->{
+            service.set((PlaybackService)field("playback"));android.widget.RemoteViews remote=new android.widget.RemoteViews(context.getPackageName(),R.layout.widget_card);MusicWidgets.configure(context,0,remote,R.layout.widget_card);
+            widget.set(remote.apply(activity,new android.widget.FrameLayout(activity)));widget.get().findViewById(R.id.widget_toggle).performClick();
+        });
+        assertTrue(waitFor(()->!service.get().wantsPlay(),5000));
+        main(()->widget.get().findViewById(R.id.widget_toggle).performClick());assertTrue(waitFor(()->service.get().isPlaying(),5000));
+        main(()->widget.get().findViewById(R.id.widget_next).performClick());assertTrue(waitFor(()->service.get().index()==1,5000));
+        main(()->widget.get().findViewById(R.id.widget_karaoke).performClick());assertTrue(waitFor(()->"player".equals(field("section"))&&(Boolean)field("karaoke"),5000));
+    }
+
+    public void testWidgetBackgroundPlaybackAndDesktopCapture()throws Exception{
+        openFixturePlayer();assertTrue(waitFor(()->((PlaybackService)field("playback")).isPlaying(),8000));
+        main(()->activity.moveTaskToBack(true));SystemClock.sleep(2200);
+        main(()->assertTrue("Returning to the launcher must keep audio playing",((PlaybackService)field("playback")).isPlaying()));
+        if(android.os.Build.VERSION.SDK_INT>=18){
+            android.graphics.Bitmap bitmap=getInstrumentation().getUiAutomation().takeScreenshot();
+            if(bitmap!=null)try{java.io.File dir=new java.io.File(context.getFilesDir(),"ui-review");dir.mkdirs();try(java.io.FileOutputStream out=new java.io.FileOutputStream(new java.io.File(dir,"widget-desktop-0.7-fixture.png"))){bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG,100,out);}}finally{bitmap.recycle();}
+        }
+        context.startActivity(new Intent(context,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+    }
+
     public void testCachedCheckUpdatesVisibleRowsWithoutReloadingOrLosingScroll()throws Exception{
         main(()->navigate("songs"));assertTrue(waitFor(()->((java.util.List<?>)field("items")).size()>=100,10000));
         main(()->((ListView)field("list")).setSelectionFromTop(20,0));assertTrue(waitFor(()->((ListView)field("list")).getFirstVisiblePosition()==20,5000));

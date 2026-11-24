@@ -12,6 +12,8 @@ python tools/updates/package.py --apksigner D:/Android/Sdk/build-tools/36.0.0/ap
 ./tools/updates/publish.ps1 -SshHost HostHatch
 ```
 
+若 SSH 未自动读取用户配置，可额外传入 `-SshConfig C:/Users/<用户名>/.ssh/config`。
+
 发布前修改 app/build.gradle 中的版本号，以及 release-notes.txt。脚本验证暂存文件、上传 APK、确认服务健康，最后原子替换清单。已发布的 APK 不可更换内容；后续修改必须递增版本和文件名，避免代理缓存混用。package.py 检查与旧 APK 签名一致，私钥不会上传。
 
 当前不可调试的 release 包沿用 0.1.0 测试签名，以覆盖现有安装。请保留本机 %USERPROFILE%/.android/debug.keystore；换构建机时安全迁移该签名。更换发行签名需要迁移方案，不能直接用新密钥覆盖安装。

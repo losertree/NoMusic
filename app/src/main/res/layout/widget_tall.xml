@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="16dp" android:background="@drawable/widget_background">
+    <LinearLayout android:id="@+id/widget_header" android:layout_width="match_parent" android:layout_height="40dp" android:gravity="center_vertical">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="NoMusic" android:textSize="15sp" android:textColor="#C2B8AA" />
+        <TextView android:id="@+id/widget_karaoke" android:layout_width="56dp" android:layout_height="40dp" android:gravity="center" android:text="@string/karaoke" android:textSize="15sp" android:textColor="#F4F0E8" android:background="@drawable/widget_button" android:contentDescription="@string/open_karaoke" />
+    </LinearLayout>
+    <ImageView android:id="@+id/widget_cover" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_horizontal" android:maxWidth="168dp" android:maxHeight="168dp" android:adjustViewBounds="true" android:scaleType="fitCenter" android:src="@drawable/ic_launcher" android:contentDescription="@string/current_cover" />
+    <TextView android:id="@+id/widget_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:gravity="center" android:maxLines="1" android:ellipsize="end" android:text="NoMusic" android:textSize="23sp" android:textStyle="bold" android:textColor="#F4F0E8" />
+    <TextView android:id="@+id/widget_artist" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:gravity="center" android:maxLines="1" android:ellipsize="end" android:textSize="16sp" android:textColor="#C2B8AA" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="vertical" android:gravity="center_vertical" android:paddingTop="8dp" android:paddingBottom="8dp">
+        <TextView android:id="@+id/widget_previous_line" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end" android:textSize="17sp" android:textColor="#C2B8AA" android:gravity="center" android:layout_marginBottom="8dp" />
+        <TextView android:id="@+id/widget_current_line" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="3" android:ellipsize="end" android:text="@string/widget_welcome" android:textSize="25sp" android:textStyle="bold" android:textColor="#D9B982" android:gravity="center" />
+        <TextView android:id="@+id/widget_reading" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:maxLines="2" android:ellipsize="end" android:textSize="15sp" android:textColor="#D8CDBD" android:gravity="center" android:visibility="gone" />
+        <TextView android:id="@+id/widget_translation" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:maxLines="2" android:ellipsize="end" android:textSize="16sp" android:textColor="#C2B8AA" android:gravity="center" android:visibility="gone" />
+        <TextView android:id="@+id/widget_next_line" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:maxLines="1" android:ellipsize="end" android:textSize="17sp" android:textColor="#C2B8AA" android:gravity="center" />
+    </LinearLayout>
+    <ProgressBar android:id="@+id/widget_progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="4dp" android:max="1000" />
+    <TextView android:id="@+id/widget_time" android:layout_width="match_parent" android:layout_height="24dp" android:gravity="center" android:maxLines="1" android:ellipsize="end" android:textSize="12sp" android:textColor="#C2B8AA" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center">
+        <ImageView android:id="@+id/widget_previous" style="@style/WidgetControl" android:src="@drawable/widget_previous" android:contentDescription="@string/previous_track" />
+        <ImageView android:id="@+id/widget_toggle" style="@style/WidgetControl" android:layout_marginLeft="12dp" android:layout_marginRight="12dp" android:src="@drawable/widget_play" android:contentDescription="@string/play_track" />
+        <ImageView android:id="@+id/widget_next" style="@style/WidgetControl" android:src="@drawable/widget_next" android:contentDescription="@string/next_track" />
+    </LinearLayout>
+</LinearLayout>

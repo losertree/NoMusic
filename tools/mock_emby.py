@@ -87,9 +87,13 @@ class Handler(BaseHTTPRequestHandler):
                         self.wfile.write(data[start:start+8192])
                         self.wfile.flush()
                         time.sleep(0.002)
-                    time.sleep(0.04)
+                    time.sleep(0.08)
                 else:
                     self.wfile.write(data)
+                    self.wfile.flush()
+                    # Small JSON/error responses need the same slirp drain
+                    # window; otherwise transport retries inflate request counts.
+                    time.sleep(0.04)
             except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
                 pass
 
